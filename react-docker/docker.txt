@@ -1,0 +1,5 @@
+docker container prune - remove all inactive container
+docker rm <id/name> - remove specific container
+docker build -t <docker-image> <file/path> 
+docker run -p 5173:5173 -v "$(pwd):/app" -v /app/node_modules  docker-react-image
+docker tag docker-react-image andropyro28/docker-react
