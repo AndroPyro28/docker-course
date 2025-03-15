@@ -16,6 +16,16 @@ function Home() {
       });
   }, []);
 
+  const deletePost = (id) => {
+    axios
+      .delete(`${import.meta.env.VITE_API_URL}/api/anime/${id}`)
+      .then((res) => {
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <main className="container">
       <h1 className="heading">Explore</h1>
@@ -31,6 +41,8 @@ function Home() {
               </div>
 
               <div className="anime_link">
+
+                <button onClick={() => deletePost(anim._id)}>Remove</button>
                 <Link to={anim.link} target="_blank" className="link">
                   Watch
                 </Link>

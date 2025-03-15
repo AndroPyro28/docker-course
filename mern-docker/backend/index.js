@@ -32,9 +32,19 @@ app.get("/api/anime", async (req, res) => {
 
 app.post("/api/anime", async (req, res) => {
   const anime = new Anim(req.body);
+
+  console.log("new anime", anime)
   await anime.save();
   res.json(anime);
 });
+
+app.delete("/api/anime/:id", async (req, res) => {
+  const {id} = req.params
+  const anime  = await Anim.findById(id).exec();
+  await anime.deleteOne({ _id: anime?._id });
+  res.json({ok: true});
+});
+
 
 const PORT = 8080 || process.env.PORT
 

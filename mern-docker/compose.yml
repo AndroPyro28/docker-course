@@ -22,7 +22,7 @@ services:
     # specify the environment variables for the web service
     # these environment variables will be available inside the container
     environment:
-      VITE_API_URL: http://localhost:8000
+      VITE_API_URL: http://localhost:8080
 
     # this is for docker compose watch mode
     # anything mentioned under develop will be watched for changes by docker compose watch and it will perform the action mentioned
@@ -41,35 +41,20 @@ services:
 
   # define the api service/container
   api: 
-    # api service depends on the db service so the db service will be started before the api service
     depends_on: 
       - db
-
-    # specify the build context for the api service
     build: ./backend
-    
-    # specify the ports to expose for the api service
-    # the first number is the port on the host machine
-    # the second number is the port inside the container
     ports: 
-      - 8000:8000
-
-    # specify environment variables for the api service
-    # for demo purposes, we're using a local mongodb instance
+      - 8080:8080
     environment: 
       DB_URL: mongodb://db/anime
     
-    # establish docker compose watch mode for the api service
     develop:
-      # specify the files to watch for changes
       watch:
-        # it'll watch for changes in package.json and package-lock.json and rebuild the container and image if there are any changes
         - path: ./backend/package.json
           action: rebuild
         - path: ./backend/package-lock.json
           action: rebuild
-        
-        # it'll watch for changes in the backend directory and sync the changes with the container real time
         - path: ./backend
           target: /app
           action: sync
