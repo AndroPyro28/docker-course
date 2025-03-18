@@ -1,5 +1,5 @@
 # docker
-
+docker login
 docker container prune - remove all inactive container
 docker image prune - remove all inactive image
 docker rm <id/name> - remove specific container
